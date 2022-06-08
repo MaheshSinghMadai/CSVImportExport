@@ -1,0 +1,53 @@
+﻿@using System.Data;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model DataTable
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-controller="Home" asp-action="Index" method="post" enctype="multipart/form-data">
+                <div class="form-group files">
+                    <input type="file" class="form-control" name="postedFile">
+                </div>
+                <input type="submit" value="Import" class="btn btn-outline-primary" style="margin:10px 0 20px 0;" />
+            </form>
+        </div>
+    </div>
+</div>
+
+@if (Model != null)
+{
+    <div classs="row table-responsive">
+        <table class="table table-hover">
+            <thead class="bg-light">
+                <tr>
+                    @foreach (DataColumn dc in Model.Columns)
+                    {
+                        <td>@dc.ColumnName</td>
+                    }
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (DataRow dr in Model.Rows)
+                {
+
+                    <tr>
+                        @foreach (DataColumn dc in Model.Columns)
+                        {
+                            <td>@dr[dc.ColumnName]</td>
+                        }
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+<div class="col-md-6">
+    <form asp-controller="Home" asp-action="Export" method="post">
+        <input type="submit" value="ExportToCSV" class="btn btn-outline-success" style="margin-top:5px;" />
+    </form>
+</div>
+

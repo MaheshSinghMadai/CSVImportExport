@@ -1,0 +1,35 @@
+﻿@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+@model IEnumerable<Student>
+
+@{
+    Layout = null;
+}
+
+
+    <h4>Customers</h4>
+    <hr />
+    <div id="Grid">
+        <table>
+            <tr>
+                <th>Customer Id</th>
+                <th>Customer Name</th>
+                <th>City</th>
+                <th>Country</th>
+            </tr>
+            @foreach (Student s in Model)
+            {
+                <tr>
+                    <td>@s.StudentId</td>
+                    <td>@s.Name</td>
+                    <td>@s.Class</td>
+                    <td>@s.Roll_No</td>
+                </tr>
+            }
+        </table>
+    </div>
+    <br />
+    <br />
+    <form asp-action="Export" asp-controller="Home" method="post">
+        <input type="submit" value="Export" />
+    </form>
+
